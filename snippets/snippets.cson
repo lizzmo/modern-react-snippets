@@ -2,7 +2,7 @@
   reactClassCompoment:
   	prefix: "rcc"
   	body: '''
-  		import React, {Component} from 'react';
+  		import React, { Component } from 'react';
 
   		class ${1:componentName} extends Component {
   			render() {
@@ -36,7 +36,8 @@
   reactClassCompomentPropTypes:
   	prefix: "rccp"
   	body: '''
-  		import React, {Component, PropTypes} from 'react';
+  		import React, { Component } from 'react';
+      import PropTypes from 'prop-types';
 
   		class ${1:componentName} extends Component {
   			render() {
@@ -48,8 +49,8 @@
   			}
   		}
 
-  		${1:componentName}.propTypes = {
-
+      ${1:componentName}.propTypes = {
+  			$0
   		};
 
   		export default ${1:componentName};
@@ -59,14 +60,10 @@
   reactClassCompomentWithMethods:
   	prefix: "rcfc"
   	body: '''
-  		import React, {Component, PropTypes} from 'react';
+  		import React, { Component } from 'react';
+      import PropTypes from 'prop-types';
 
   		class ${1:componentName} extends Component {
-  			constructor(props) {
-  				super(props);
-
-  			}
-
   			componentWillMount() {
 
   			}
@@ -104,8 +101,8 @@
   			}
   		}
 
-  		${1:componentName}.propTypes = {
-
+      ${1:componentName}.propTypes = {
+  			$0
   		};
 
   		export default ${1:componentName};
@@ -129,12 +126,28 @@
 
   	'''
   	description: "Creates a stateless React component without PropTypes and ES6 module system"
+  reactStatelessReturn:
+  	prefix: "rscr"
+  	body: '''
+  		import React from 'react';
+
+  		const ${1:componentName} = () => (
+				<div>
+					$0
+				</div>
+  		);
+
+  		export default ${1:componentName};
+
+  	'''
+  	description: "Creates a stateless React component without PropTypes and ES6 module system"
   reactStatelessProps:
   	prefix: "rscp"
   	body: '''
-  		import React, {PropTypes} from 'react';
+  		import React from 'react';
+      import PropTypes from 'prop-types';
 
-  		const ${1:componentName} = props => {
+  		const ${1:componentName} = () => {
   			return (
   				<div>
 
@@ -150,34 +163,14 @@
 
   	'''
   	description: "Creates a stateless React component with PropTypes and ES6 module system"
-  classConstructor:
-  	prefix: "con"
-  	body: '''
-  		constructor(props) {
-  			super(props);
-  			$0
-  		}
-
-  	'''
-  	description: "Adds a default constructor for the class that contains props as arguments"
-  classConstructorContext:
-  	prefix: "conc"
-  	body: '''
-  		constructor(props, context) {
-  			super(props, context);
-  			$0
-  		}
-
-  	'''
-  	description: "Adds a default constructor for the class that contains props and context as arguments"
   emptyState:
   	prefix: "est"
   	body: '''
-  		this.state = {
+  		state = {
   			$1
-  		};
+  		}
   	'''
-  	description: "Creates empty state object. To be used in a constructor."
+  	description: "Creates empty state object."
   componentWillMount:
   	prefix: "cwm"
   	body: '''
